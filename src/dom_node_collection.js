@@ -45,7 +45,23 @@ class DOMNodeCollection {
   }
 
   removeClass(string) {
-    
+    this.elements.forEach( el => {
+      el.classList.remove(string)
+      if (!el.getAttribute("class")) {
+        el.removeAttribute("class")
+      }
+    })
+  }
+
+  children() {
+    let kiddies = [];
+    this.elements.forEach( el => {
+      if(el.children.length > 0){
+        let kids = Array.from(el.children)
+        kiddies.concat(kids)
+      }
+    })
+    return new DOMNodeCollection(kiddies);
   }
 }
 
